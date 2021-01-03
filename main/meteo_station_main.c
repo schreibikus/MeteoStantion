@@ -157,7 +157,7 @@ void app_main()
                         vTaskDelay((bme280_cal_meas_delay(&bmedev.settings) + portTICK_PERIOD_MS / 2) / portTICK_PERIOD_MS);
                         if(bme280_get_sensor_data(BME280_ALL, &comp_data, &bmedev) == 0)
                         {
-                            printf("Temp %d.%d, Presure %d, Humidity %d.%d\n", comp_data.temperature / 100, SENS_ABS(comp_data.temperature) % 100, comp_data.pressure, comp_data.humidity >> 10, comp_data.humidity & 0x3FF);
+                            printf("Temp %d.%02d, Presure %d, Humidity %d.%02d\n", comp_data.temperature / 100, SENS_ABS(comp_data.temperature) % 100, comp_data.pressure, comp_data.humidity >> 10, ((comp_data.humidity & 0x3FF) * 100) >> 10);
                         }
                         else
                         {
